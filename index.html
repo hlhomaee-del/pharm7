@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CCMA Medication Mastery Studio | Hilary Homaii</title>
+<style>
+:root{
+  --ink:#102033;--muted:#5b6b7d;--line:#d8e2ef;--glass:rgba(255,255,255,.78);
+  --blue:#2563eb;--violet:#7c3aed;--pink:#db2777;--teal:#0f766e;--green:#16a34a;--orange:#ea580c;--red:#dc2626;--gold:#ca8a04;--slate:#475569;
+  --shadow:0 22px 55px rgba(15,23,42,.14);--soft:0 10px 24px rgba(15,23,42,.10);--radius:26px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh;
+  background:radial-gradient(circle at 5% 5%,#dbeafe 0,transparent 28%),radial-gradient(circle at 92% 10%,#fce7f3 0,transparent 30%),radial-gradient(circle at 50% 95%,#dcfce7 0,transparent 25%),linear-gradient(135deg,#f8fafc,#eef7ff 55%,#fff7ed);
+}
+header{padding:34px 20px 24px;text-align:center}
+header h1{font-size:clamp(2.1rem,5vw,4.8rem);line-height:.95;letter-spacing:-.07em;margin:0 auto 12px;max-width:1150px}
+header p{max-width:960px;margin:0 auto;color:var(--muted);font-size:1.08rem;line-height:1.6}
+.badge{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 13px;font-weight:950;background:rgba(255,255,255,.85);border:1px solid var(--line);box-shadow:var(--soft);margin-bottom:12px}
+.topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);background:rgba(255,255,255,.78);border-bottom:1px solid rgba(148,163,184,.38);padding:14px 12px 18px;min-height:78px;overflow:visible}
+.tabs{display:flex;gap:10px;overflow-x:auto;overflow-y:visible;max-width:1320px;margin:0 auto;padding:8px 8px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.tabs::-webkit-scrollbar{height:10px}.tabs::-webkit-scrollbar-track{background:rgba(226,232,240,.9);border-radius:999px}.tabs::-webkit-scrollbar-thumb{background:linear-gradient(90deg,#2563eb,#7c3aed,#db2777);border-radius:999px}
+.tab{flex:0 0 auto;border:1px solid rgba(255,255,255,.86);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);padding:13px 17px;min-height:46px;border-radius:999px;white-space:nowrap;font-weight:1000;cursor:pointer;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 -12px 22px rgba(255,255,255,.12),0 10px 24px rgba(15,23,42,.18);transition:.2s}
+.tab:before{content:"";position:absolute;left:10%;top:4px;width:80%;height:38%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,.08));pointer-events:none}
+.tab:hover{transform:translateY(-2px) scale(1.02);filter:saturate(1.25) brightness(1.05)}
+.tab.active{outline:4px solid rgba(37,99,235,.24);transform:translateY(-2px) scale(1.04)}
+.collect-count{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;margin-left:6px;border-radius:999px;background:#fff;color:#111827;font-weight:1000;text-shadow:none;box-shadow:inset 0 0 0 1px rgba(15,23,42,.12)}
+main{max-width:1320px;margin:0 auto;padding:24px 18px 90px}
+.panel{display:none;animation:fade .25s ease}.panel.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{font-size:clamp(1.6rem,3vw,2.55rem);letter-spacing:-.055em;margin:0 0 10px}h3{margin:0 0 8px;font-size:1.25rem}p,li{line-height:1.57}.mini{font-size:.92rem;color:var(--muted)}
+.hero,.card,.quiz,.lab,.reviewbox{background:var(--glass);border:1px solid rgba(148,163,184,.38);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;backdrop-filter:blur(16px)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;margin-bottom:20px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid,.grid4,.flashgrid{grid-template-columns:1fr!important}}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0}
+.card{position:relative;overflow:hidden}.card:before{content:"";position:absolute;inset:0 0 auto 0;height:7px;background:linear-gradient(90deg,#60a5fa,#c084fc,#fb7185,#f59e0b)}
+.btn{border:1px solid rgba(255,255,255,.84);border-radius:18px;padding:12px 16px;font-weight:1000;cursor:pointer;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.28);position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.72),inset 0 -12px 24px rgba(255,255,255,.10),0 12px 26px rgba(15,23,42,.18);transition:.18s;background:linear-gradient(135deg,#2563eb,#7c3aed)}
+.btn:before{content:"";position:absolute;top:4px;left:10%;width:80%;height:36%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.50),rgba(255,255,255,.05));pointer-events:none}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.05) saturate(1.12)}
+.btn.green{background:linear-gradient(135deg,#0f766e,#16a34a)}.btn.orange{background:linear-gradient(135deg,#ea580c,#db2777)}.btn.dark{background:linear-gradient(135deg,#111827,#475569)}
+.collectbtn.collected{background:linear-gradient(135deg,#16a34a,#0f766e)!important;cursor:default;opacity:.95}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+.suffix{font-weight:950;color:#111827;background:#fde68a;border-radius:10px;padding:2px 7px}.alert{padding:14px;border-radius:17px;margin:10px 0;border-left:7px solid var(--orange);background:#fff7ed}.danger{border-left-color:var(--red);background:#fef2f2}.safe{border-left-color:var(--green);background:#ecfdf5}.bluebox{border-left-color:var(--blue);background:#eff6ff}
+.bodylab{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0}@media(max-width:900px){.bodylab{grid-template-columns:1fr}}
+.meter{height:22px;border-radius:999px;background:#e2e8f0;overflow:hidden;margin:8px 0}.fill{height:100%;width:50%;background:linear-gradient(90deg,#22c55e,#f59e0b,#dc2626);transition:.35s}
+.formula{font-size:1.3rem;font-weight:1000;background:white;border:1px solid var(--line);padding:14px;border-radius:18px;text-align:center}.knobrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin:8px 0}input[type=range]{width:100%}
+.quiz{margin:14px 0}.question{font-size:1.08rem;font-weight:950;margin-bottom:12px}.options{display:grid;gap:10px}
+.option{text-align:left;border:2px solid #dbe3ee;background:white;border-radius:18px;padding:13px 14px;cursor:pointer;font-weight:780;transition:.15s;color:#172033}
+.option:hover{transform:translateY(-1px);border-color:#93c5fd;background:#eff6ff}.option.correct{background:#dcfce7;border-color:#22c55e;color:#14532d}.option.wrong{background:#fee2e2;border-color:#ef4444;color:#7f1d1d}
+.rationale{display:none;margin-top:12px;padding:13px;border-radius:16px;background:#f8fafc;border:1px dashed #94a3b8;color:#334155}.rationale.show{display:block}.tag{font-size:.8rem;font-weight:950;color:#475569;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.scorebar{height:14px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin:10px 0}.scorefill{height:100%;width:0;background:linear-gradient(90deg,#22c55e,#2563eb,#7c3aed);transition:.3s}.scorebox{font-weight:950;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:12px 14px}
+.flashgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.flash{min-height:170px;background:white;border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--soft);overflow:auto}.flash .back{display:none}.flash.flipped .front{display:none}.flash.flipped .back{display:block}
+.flipbtn{margin-top:10px;border:0;border-radius:999px;padding:9px 12px;font-weight:950;color:white;background:linear-gradient(135deg,#111827,#7c3aed);cursor:pointer;box-shadow:0 8px 16px rgba(15,23,42,.18)}
+.missed{background:#fff7ed;border:1px solid #fed7aa;border-radius:18px;padding:12px;margin:8px 0}textarea{width:100%;min-height:120px;border-radius:18px;border:1px solid #cbd5e1;padding:14px;font:inherit;resize:vertical;background:white}
+.collected-toast{position:fixed;right:18px;bottom:18px;z-index:9999;background:rgba(15,23,42,.92);color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:0 18px 45px rgba(15,23,42,.28);border-radius:18px;padding:14px 16px;font-weight:900;opacity:0;transform:translateY(12px);transition:.25s;pointer-events:none}.collected-toast.show{opacity:1;transform:translateY(0)}
+.footer{text-align:center;color:#64748b;margin-top:34px;font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+<div class="badge">CCMA / ATI-Style Medication Pattern Lab</div>
+<h1>Medication Mastery Studio</h1>
+<p>A colorful, sound-supported, concept-checking medication class lab designed to help medical assistant students recognize drug classes, suffixes, mechanisms, patient-safety warnings, side effects, adverse reactions, and test-style clues.</p>
+</header>
+<nav class="topbar"><div class="tabs" id="tabs"></div></nav>
+<main id="app"></main>
+<script>
+const tabs=[
+{id:'start',label:'Start',c:'#2563eb'},{id:'vocab',label:'Vocabulary First',c:'#0f766e'},{id:'suffix',label:'Suffix Lab',c:'#7c3aed'},{id:'blood',label:'Blood Thinners',c:'#dc2626'},{id:'bp',label:'Antihypertensives',c:'#8b5cf6'},{id:'diuretics',label:'Diuretics',c:'#0891b2'},{id:'gi',label:'GI Meds',c:'#ea580c'},{id:'antidepressants',label:'Antidepressants',c:'#db2777'},{id:'diabetes',label:'Diabetes',c:'#16a34a'},{id:'steroids',label:'Corticosteroids',c:'#ca8a04'},{id:'respiratory',label:'Respiratory',c:'#0284c7'},{id:'other',label:'Other',c:'#475569'},{id:'cards',label:'Collected Cards',c:'#111827'},{id:'review',label:'Personal Review',c:'#020617'}];
+
+let current='start', score=0, answered=0, total=0, misses=[], collection=[];
+
+const vocab=[
+['Medication class','A family of medications that work in a similar way or treat a similar problem.','Example: beta blockers, anticoagulants, PPIs.'],
+['Indication','The reason a medication is used.','Example: hypertension is an indication for lisinopril.'],
+['Contraindication','A reason the medication should not be used or should be questioned.','Example: certain BP meds are contraindicated in pregnancy.'],
+['Side effect','An expected unwanted effect that may happen at normal doses.','Example: dry cough with ACE inhibitors.'],
+['Adverse reaction','A harmful or dangerous reaction that needs urgent attention or reporting.','Example: angioedema, severe bleeding, serotonin syndrome.'],
+['Mechanism of action','How the drug works in the body.','Example: albuterol relaxes airway smooth muscle.'],
+['Anticoagulant','A medication that slows clotting-factor activity.','Example: warfarin, heparin, apixaban.'],
+['Antiplatelet','A medication that reduces platelet clumping.','Example: aspirin, clopidogrel.'],
+['Thrombolytic','A clot-busting medication used in emergencies.','Example: alteplase/tPA.']
+];
+
+const suffixes=[
+['-pril','ACE inhibitor','lisinopril, enalapril','BP med; watch cough, high potassium, angioedema, pregnancy warning'],
+['-sartan','ARB','losartan, valsartan','BP med; less cough than ACE; watch high potassium and pregnancy warning'],
+['-olol','Beta blocker','metoprolol, atenolol, propranolol','Slows heart rate; check pulse; can mask hypoglycemia; caution asthma/COPD with nonselective agents'],
+['-dipine','Calcium channel blocker','amlodipine, nifedipine','Relaxes vessels; watch edema, dizziness, hypotension'],
+['-prazole','PPI','omeprazole, pantoprazole','Lowers stomach acid; often before meals'],
+['-flozin','SGLT2 inhibitor','empagliflozin, canagliflozin','Diabetes med; sends glucose out in urine; watch dehydration/genital infections'],
+['-gliptin','DPP-4 inhibitor','sitagliptin, linagliptin','Diabetes med; increases incretin effect'],
+['-tide','GLP-1 receptor agonist','semaglutide, liraglutide, dulaglutide','Diabetes/weight-related med; slows stomach emptying; GI effects'],
+['-statin','Statin','atorvastatin, rosuvastatin','Cholesterol med; report muscle pain/weakness'],
+['HCTZ / -thiazide','Thiazide diuretic','hydrochlorothiazide, chlorthalidone','Fluid/BP med; watch low potassium, glucose, uric acid']
+];
+
+const classes={
+blood:{title:'Blood Thinners: stop clots from growing or forming',hook:'Blood thinners do not make blood watery. They slow clotting or weaken platelet clumping. The MA safety job is to notice bleeding clues and report them.',items:[
+['Anticoagulants','Work on clotting factors','warfarin, heparin, enoxaparin, apixaban, rivaroxaban','Watch bleeding, bruising, black stool, blood in urine. Warfarin connects to INR and vitamin K consistency.'],
+['Antiplatelets','Stop platelets from sticking together','aspirin, clopidogrel','Watch bleeding/bruising. Aspirin may irritate the stomach.'],
+['Thrombolytics','Break down an existing clot','alteplase/tPA','Emergency clot-buster. Huge bleeding risk. Recognize as high-alert.']],
+qs:[
+['Which statement is most accurate?','Blood thinners slow clotting or platelet clumping; they do not literally dilute blood.',['Blood thinners turn blood into water.','Blood thinners only treat stomach acid.','Blood thinners are rescue inhalers.'],'Blood thinners reduce clotting or platelet aggregation; they do not literally water down blood.','blood thinner definition'],
+['A patient on apixaban reports black, tarry stool. What should the MA recognize?','Possible GI bleeding that must be reported or escalated.',['Expected harmless urine glucose loss.','Normal effect of a PPI.','A sign of low stomach acid only.'],'Black tarry stool can signal GI bleeding.','bleeding red flags'],
+['Warfarin is most closely connected with which monitoring term?','INR.',['Peak flow.','A1C only.','Pulse oximetry only.'],'Warfarin anticoagulation is monitored with INR.','warfarin INR']]},
+bp:{title:'Antihypertensives: lower pressure by lowering volume, pump force, or vessel resistance',hook:'BP rises when volume, pump force, or resistance rises. BP meds lower one or more of those pieces.',items:[
+['ACE inhibitors','Block formation of angiotensin II','lisinopril, enalapril','-pril. Watch cough, hyperkalemia, angioedema, pregnancy warning.'],
+['ARBs','Block angiotensin II receptor','losartan, valsartan','-sartan. Less cough than ACE. Watch hyperkalemia and pregnancy warning.'],
+['Beta blockers','Slow the heart and reduce workload','metoprolol, atenolol, propranolol','-olol. Check pulse/BP. Can mask hypoglycemia. Nonselective may worsen asthma/COPD.'],
+['Calcium channel blockers','Relax blood vessels and/or slow cardiac conduction','amlodipine, nifedipine, diltiazem, verapamil','-dipine for many. Watch edema, dizziness, low BP.'],
+['Alpha blockers','Relax vessels and prostate smooth muscle','prazosin, doxazosin','-zosin. Watch first-dose orthostatic hypotension.'],
+['Central alpha agonists','Reduce sympathetic signals from brain','clonidine, methyldopa','Watch sedation, dry mouth, rebound hypertension if stopped suddenly.']],
+qs:[
+['Which suffix suggests an ACE inhibitor?','-pril.',['-sartan.','-prazole.','-statin.'],'Lisinopril and enalapril are ACE inhibitors ending in -pril.','ACE suffix'],
+['Before a patient takes metoprolol, which vital sign is especially important?','Pulse, because beta blockers slow heart rate.',['Temperature, because beta blockers cause fever.','Height, because beta blockers shrink vessels permanently.','Pain scale only, because beta blockers are analgesics.'],'Beta blockers can cause bradycardia and hypotension.','beta blocker pulse'],
+['A patient on lisinopril has swelling of lips and tongue. What is this?','Possible angioedema: urgent adverse reaction.',['A mild expected side effect to ignore.','A normal sign BP is controlled.','A common harmless urine effect.'],'Angioedema is dangerous and must be escalated.','ACE angioedema']]},
+diuretics:{title:'Diuretics: lower fluid volume by helping the kidneys remove water and salt',hook:'Think open the drain. Less fluid volume can lower BP and reduce edema, but electrolyte problems can appear.',items:[
+['Loop diuretics','Powerful fluid removal','furosemide, bumetanide, torsemide','Often used for edema/heart failure. Watch low potassium, dehydration, low BP.'],
+['Thiazide diuretics','Moderate diuresis; common for hypertension','hydrochlorothiazide/HCTZ, chlorthalidone','Watch low potassium, increased glucose, increased uric acid.'],
+['Potassium-sparing diuretics','Remove fluid but keep potassium','spironolactone, triamterene, amiloride','Watch high potassium.']],
+qs:[
+['Furosemide is most associated with which risk?','Low potassium and dehydration.',['High potassium retention as the main rule.','Oral thrush.','Serotonin syndrome.'],'Loop diuretics can cause potassium loss and dehydration.','loop diuretic potassium'],
+['Spironolactone is different because it is:','Potassium-sparing.',['A rescue inhaler.','A PPI.','A thrombolytic.'],'Spironolactone keeps potassium.','spironolactone']]},
+gi:{title:'GI Medications: acid, nausea, constipation, diarrhea, and gut movement',hook:'Ask what the gut problem is: too much acid, nausea, too slow, too fast, or irritation.',items:[
+['PPIs','Strongly reduce acid production','omeprazole, pantoprazole','-prazole. Often taken before meals.'],
+['H2 blockers','Reduce stomach acid','famotidine, cimetidine','Cimetidine has interactions.'],
+['Antacids','Neutralize existing acid','calcium carbonate, magnesium hydroxide, aluminum hydroxide','Magnesium may cause diarrhea; aluminum/calcium may cause constipation.'],
+['Antiemetics','Reduce nausea/vomiting','ondansetron, promethazine, metoclopramide','Promethazine can sedate; ondansetron has QT caution.']],
+qs:[
+['Which suffix points to a PPI?','-prazole.',['-pril.','-olol.','-flozin.'],'Omeprazole and pantoprazole are PPIs.','PPI suffix'],
+['Ondansetron is used mainly for:','Nausea and vomiting.',['Hypertension.','Blood clot prevention.','High cholesterol.'],'Ondansetron is an antiemetic.','antiemetic']]},
+antidepressants:{title:'Antidepressants: support mood chemistry but require safety awareness',hook:'Recognize classes, serotonin syndrome, suicide-risk warning, sedation, and interaction danger.',items:[
+['SSRIs','Increase serotonin','fluoxetine, sertraline, citalopram, escitalopram','Watch GI upset, sexual side effects, serotonin syndrome, young-patient suicide warning.'],
+['SNRIs','Increase serotonin and norepinephrine','venlafaxine, duloxetine','Can increase BP; do not stop abruptly.'],
+['TCAs','Older antidepressants with anticholinergic effects','amitriptyline, nortriptyline','Dry mouth, constipation, urinary retention, blurred vision.'],
+['MAOIs','High interaction antidepressants','phenelzine, tranylcypromine','Tyramine-food and medication interactions; hypertensive crisis risk.']],
+qs:[
+['Fever, agitation, tremor, sweating, and diarrhea in a patient on an SSRI suggests:','Possible serotonin syndrome.',['Normal mild hunger.','Expected low potassium.','Routine acid reflux.'],'This cluster is concerning for serotonin syndrome.','serotonin syndrome'],
+['Which class requires tyramine-food caution?','MAOIs.',['PPIs.','ARBs.','SGLT2 inhibitors.'],'MAOIs can interact with tyramine.','MAOI tyramine']]},
+diabetes:{title:'Diabetes Medications: lower glucose by different pathways',hook:'Some add insulin. Some help insulin work. Some make the kidney remove glucose. Some slow digestion or hormone signals.',items:[
+['Insulin','Replaces or supplements insulin','rapid, short, intermediate, long-acting','High hypoglycemia risk. Timing, dose, and meal status matter.'],
+['Metformin','Lowers liver glucose production and improves sensitivity','metformin','GI upset common; rare lactic acidosis.'],
+['Sulfonylureas','Tell pancreas to release insulin','glipizide, glyburide, glimepiride','Hypoglycemia risk.'],
+['SGLT2 inhibitors','Make kidneys remove glucose in urine','empagliflozin, canagliflozin','-flozin. Watch dehydration and genital infections.'],
+['GLP-1 agonists','Increase glucose-dependent insulin and slow stomach emptying','semaglutide, liraglutide, dulaglutide','-tide. GI side effects.']],
+qs:[
+['Which suffix points to an SGLT2 inhibitor?','-flozin.',['-prazole.','-pril.','-olol.'],'Empagliflozin and canagliflozin end in -flozin.','SGLT2 suffix'],
+['Shaky, sweaty, confused, hungry after diabetes medication suggests:','Hypoglycemia.',['Serotonin syndrome.','GI bleeding.','Oral candidiasis.'],'These are classic low blood sugar clues.','hypoglycemia']]},
+steroids:{title:'Corticosteroids: calm inflammation and suppress immune response',hook:'Steroids can affect sugar, infection risk, mood, bones, and mouth health.',items:[
+['Systemic steroids','Whole-body anti-inflammatory effect','prednisone, methylprednisolone, dexamethasone','Watch hyperglycemia, infection, mood changes, fluid retention.'],
+['Inhaled steroids','Airway inflammation control','fluticasone, budesonide','Not rescue. Rinse mouth to prevent thrush.'],
+['Topical/nasal steroids','Local inflammation control','hydrocortisone cream, fluticasone nasal','Technique and overuse matter.']],
+qs:[
+['After using an inhaled corticosteroid, the patient should:','Rinse the mouth.',['Check INR immediately.','Eat tyramine foods.','Use it only as a rescue inhaler.'],'Rinsing helps prevent oral thrush.','inhaled steroid rinse'],
+['Systemic steroids can raise:','Blood glucose.',['Oxygen saturation directly.','INR as their only purpose.','Platelet clumping as the goal.'],'Corticosteroids can increase blood glucose.','steroid glucose']]},
+respiratory:{title:'Respiratory Medications: rescue, control, allergy, and mucus support',hook:'Rescue meds open airways fast; controller meds reduce inflammation over time.',items:[
+['SABA rescue inhalers','Fast bronchodilation','albuterol, levalbuterol','Quick relief. Watch tremor, nervousness, tachycardia.'],
+['LABA controllers','Longer bronchodilation','salmeterol, formoterol','Not for sudden rescue; often combined with inhaled steroid.'],
+['Inhaled corticosteroids','Airway inflammation control','fluticasone, budesonide','Rinse mouth; not rescue.'],
+['Antihistamines/leukotriene meds','Reduce allergy signals','loratadine, cetirizine, diphenhydramine, montelukast','Diphenhydramine sedates; montelukast has mood warning.']],
+qs:[
+['Which is a rescue inhaler?','Albuterol.',['Fluticasone.','Warfarin.','Omeprazole.'],'Albuterol is a short-acting bronchodilator.','albuterol'],
+['Albuterol can commonly cause:','Tremor and fast heartbeat.',['Black tarry stool as expected.','Oral thrush as its main issue.','Low blood sugar as its goal.'],'SABA medications can cause tremor and tachycardia.','albuterol side effect']]},
+other:{title:'Other High-Yield Medication Classes',hook:'These show up often in clinics, medication lists, and test questions.',items:[
+['Statins','Lower cholesterol','atorvastatin, simvastatin, rosuvastatin','-statin. Report muscle pain/weakness; liver concerns.'],
+['Antibiotics','Treat bacterial infection','penicillins, cephalosporins, azithromycin, ciprofloxacin','Check allergies; complete course unless provider says otherwise; watch severe diarrhea.'],
+['NSAIDs','Pain/inflammation','ibuprofen, naproxen, ketorolac','Watch GI bleeding, kidney issues, BP concerns.'],
+['Opioids','Stronger pain control','morphine, oxycodone, hydrocodone','Controlled substances. Watch sedation, respiratory depression, constipation.']],
+qs:[
+['Which suffix indicates a cholesterol medication?','-statin.',['-sartan.','-prazole.','-flozin.'],'Statins lower cholesterol.','statin suffix'],
+['Before antibiotic-related care, the MA should especially check:','Allergies.',['Favorite food only.','Shoe size.','Preferred music.'],'Medication allergy review is a safety priority.','antibiotic allergy']]}
+};
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function sound(ok=true){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?760:180;g.gain.setValueAtTime(.07,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.22);o.start();o.stop(c.currentTime+.24)}catch(e){}}
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(t).replace(/<[^>]+>/g,''));u.rate=.94;speechSynthesis.speak(u)}catch(e){}}
+function tabsHTML(){document.getElementById('tabs').innerHTML=tabs.map(t=>`<button class="tab ${current===t.id?'active':''}" style="background:linear-gradient(135deg,${t.c},#ffffff33)" data-tab="${t.id}">${t.label}${t.id==='cards'?`<span class="collect-count">${collection.length}</span>`:''}</button>`).join('')}
+function go(id){current=id;tabsHTML();render();window.scrollTo({top:0,behavior:'smooth'})}
+function collectButton(title,front,back){return `<button class="btn collectbtn" data-title="${esc(title)}" data-front="${esc(front)}" data-back="${esc(back)}">Collect</button>`}
+function q(q){total++;const opts=shuffle([q[1],...q[2]]);return `<div class="quiz" data-skill="${esc(q[4])}"><div class="tag">Concept Check</div><div class="question">${esc(q[0])}</div><div class="options">${opts.map(o=>`<button class="option" data-correct="${esc(q[1])}" data-rationale="${esc(q[3])}" data-skill="${esc(q[4])}">${esc(o)}</button>`).join('')}</div><div class="rationale"></div></div>`}
+function hero(label,title,hook,next){return `<div class="hero"><div><div class="badge">${esc(label)}</div><h2>${esc(title)}</h2><p>${esc(hook)}</p><div class="controls"><button class="btn green" data-speak="${esc(title+'. '+hook)}">Listen</button>${next?`<button class="btn orange" data-tab="${next}">Next</button>`:''}</div></div><div class="reviewbox"><h3>Progress</h3><div class="scorebar"><div class="scorefill" style="width:${total?Math.round(answered/total*100):0}%"></div></div><div class="scorebox">Score: <span class="score">${score}</span> / <span class="answered">${answered}</span></div></div></div>`}
+function startPage(){return hero('Revolutionary Medication Class Pathway','Learn the idea first. Then the suffix. Then the safety warning. Then the test clue.','Students build a medication map: what the drug does, what body system it affects, what the MA should watch for, and what the test is trying to trick them with.','vocab')+`<div class="grid"><div class="card"><h3>1. Vocabulary First</h3><p>Side effect vs adverse reaction, contraindication, indication, mechanism.</p></div><div class="card"><h3>2. Suffix Detective</h3><p>Suffix to class to purpose to safety.</p></div><div class="card"><h3>3. Personal Review</h3><p>Wrong answers become a focused retest and Amplify summary.</p></div></div>`}
+function vocabPage(){return hero('Vocabulary Before Medication Classes','Students cannot master meds if these words are blurry.','The test uses indication, contraindication, side effect, adverse reaction, and mechanism as thinking language.','suffix')+`<div class="grid">${vocab.map(v=>`<div class="card"><h3>${esc(v[0])}</h3><p>${esc(v[1])}</p><p class="mini"><b>Example:</b> ${esc(v[2])}</p>${collectButton(v[0],v[1],v[2])}</div>`).join('')}</div>`+[
+['Which is an adverse reaction, not just a mild side effect?','Swelling of lips/tongue after lisinopril.',['Mild nausea after a new medication.','Temporary dry mouth.','Slight drowsiness reported as expected.'],'Angioedema can threaten the airway and is an urgent adverse reaction.','side effect vs adverse reaction'],
+['What does contraindication mean?','A reason the drug should not be used or should be questioned.',['The brand name of a drug.','A normal expected benefit.','A medication that lowers acid.'],'Contraindication means a reason to avoid or question use.','contraindication']].map(q).join('')}
+function suffixPage(){return hero('Suffix Detective Lab','Recognize the ending, predict the class, then predict the warning.','Suffixes are powerful clues when students connect suffix to class to purpose to safety.','blood')+`<div class="grid4">${suffixes.map(s=>`<div class="card"><h3><span class="suffix">${esc(s[0])}</span></h3><p><b>${esc(s[1])}</b></p><p>${esc(s[2])}</p><p class="mini">${esc(s[3])}</p>${collectButton(s[0],s[1]+': '+s[2],s[3])}</div>`).join('')}</div>`+[
+['Which suffix tells you the medication is probably a beta blocker?','-olol.',['-prazole.','-flozin.','-statin.'],'Metoprolol, atenolol, and propranolol end in -olol.','suffix beta blocker'],
+['Which suffix tells you the medication may lower stomach acid?','-prazole.',['-sartan.','-olol.','-pril.'],'Omeprazole and pantoprazole are PPIs.','suffix PPI'],
+['Which suffix tells you glucose may leave through urine?','-flozin.',['-dipine.','-statin.','-pril.'],'SGLT2 inhibitors end in -flozin and make kidneys excrete glucose.','suffix SGLT2']].map(q).join('')}
+function bpLab(){return `<div class="lab"><h2>Visual BP Equation Lab</h2><p>Move the sliders. This is a learning model, not a medical calculator.</p><div class="formula">Blood Pressure ≈ Volume × Pump Force × Vessel Resistance</div><div class="bodylab"><div><div class="knobrow"><label>Fluid Volume</label><b id="volN">5</b></div><input id="vol" type="range" min="1" max="10" value="5"><div class="knobrow"><label>Pump Force / Heart Work</label><b id="pumpN">5</b></div><input id="pump" type="range" min="1" max="10" value="5"><div class="knobrow"><label>Vessel Resistance</label><b id="resN">5</b></div><input id="res" type="range" min="1" max="10" value="5"><div class="controls"><button class="btn" data-setbp="3,5,5">Diuretic effect</button><button class="btn" data-setbp="5,3,5">Beta blocker effect</button><button class="btn" data-setbp="5,5,3">ACE/ARB/CCB effect</button></div></div><div><h3>Estimated Pressure Load</h3><div class="meter"><div class="fill" id="bpFill"></div></div><div class="scorebox" id="bpText">Move a slider.</div></div></div></div>`}
+function diureticLab(){return `<div class="lab"><h2>Diuretic Open-the-Drain Visual</h2><p>Diuretics help remove extra fluid, which can reduce edema and lower BP.</p><div class="bodylab"><div><h3>Fluid Tank</h3><div class="meter" style="height:34px"><div class="fill" id="fluidFill" style="width:80%"></div></div><button class="btn" data-fluid="80">Before diuretic</button> <button class="btn green" data-fluid="38">After diuretic</button></div><div><div class="safe"><b>Helpful:</b> less fluid can reduce edema and pressure.</div><div class="danger"><b>Watch:</b> dehydration, dizziness, low BP, and potassium changes.</div></div></div></div>`}
+function classPage(id){const d=classes[id];const next=tabs[tabs.findIndex(t=>t.id===id)+1]?.id||'review';return hero(tabs.find(t=>t.id===id).label,d.title,d.hook,next)+(id==='bp'?bpLab():'')+(id==='diuretics'?diureticLab():'')+`<div class="grid">${d.items.map(i=>`<div class="card"><h3>${esc(i[0])}</h3><p><b>What it does:</b> ${esc(i[1])}</p><p><b>Examples:</b> ${esc(i[2])}</p><p class="mini"><b>Watch:</b> ${esc(i[3])}</p>${collectButton(i[0],i[1]+' Examples: '+i[2],i[3])}</div>`).join('')}</div><h2>Practice after learning</h2>`+d.qs.map(q).join('')}
+function cardsPage(){return hero('Collected Learning Cards','Your collected cards are here.','Click Flip card to reveal the memory clue.','review')+`<div class="flashgrid">${collection.length?collection.map((c,i)=>`<div class="flash" id="flash-${i}"><div class="front"><h3>${esc(c.title)}</h3><p>${esc(c.front)}</p><button class="flipbtn" data-flip="${i}">Flip card</button></div><div class="back"><h3>Remember</h3><p>${esc(c.back)}</p><button class="flipbtn" data-flip="${i}">Back to front</button></div></div>`).join(''):'<div class="card"><h3>No cards collected yet.</h3><p>Go to a lesson tab and click Collect. The button should turn green and say Collected ✓.</p></div>'}</div><div class="controls"><button class="btn dark" id="clearCards">Clear Collected Cards</button></div>`}
+function reviewPage(){const unique=[...new Map(misses.map(m=>[m.skill,m])).values()];const missed=unique.length?unique.map(m=>`<div class="missed"><b>${esc(m.skill)}</b><br><span class="mini">Correct idea: ${esc(m.correct)}</span></div>`).join(''):'<div class="safe">No missed questions yet.</div>';return hero('Personal Review + Amplify Summary','These are the concepts you need to work on.','Wrong answers are collected here for focused review.',null)+`<div class="reviewbox"><h3>Missed Skills</h3>${missed}</div><div class="reviewbox"><h2>Feedback + Summary Generator</h2><textarea id="feedback" placeholder="Student feedback: What helped? What confused you?"></textarea><div class="controls"><button class="btn green" id="genSummary">Generate Summary with Feedback</button><button class="btn" id="copySummary">Copy Everything</button></div><textarea id="out" placeholder="Generated summary will appear here."></textarea></div><div class="footer">Medication Mastery Studio for CCMA Students<br>Designed and authored by Hilary Homaii, Instructional Designer and Curriculum Developer.<br>© ${new Date().getFullYear()} Hilary Homaii. All rights reserved. Educational use only.</div>`}
+function render(){total=0;let html='';if(current==='start')html=startPage();else if(current==='vocab')html=vocabPage();else if(current==='suffix')html=suffixPage();else if(current==='cards')html=cardsPage();else if(current==='review')html=reviewPage();else html=classPage(current);document.getElementById('app').innerHTML=html;updateScore();setTimeout(initVisuals,30)}
+function updateScore(){document.querySelectorAll('.score').forEach(x=>x.textContent=score);document.querySelectorAll('.answered').forEach(x=>x.textContent=answered);document.querySelectorAll('.collect-count').forEach(x=>x.textContent=collection.length)}
+function toast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='collected-toast';document.body.appendChild(t)}t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400)}
+function initVisuals(){if(document.getElementById('vol'))calcBP()}
+function calcBP(){const v=+document.getElementById('vol').value,p=+document.getElementById('pump').value,r=+document.getElementById('res').value;document.getElementById('volN').textContent=v;document.getElementById('pumpN').textContent=p;document.getElementById('resN').textContent=r;const load=v*p*r;document.getElementById('bpFill').style.width=Math.min(100,Math.round(load/10))+'%';document.getElementById('bpText').textContent=load<80?'Lower pressure load':load<180?'Moderate pressure load':'High pressure load'}
+document.addEventListener('click',e=>{
+ const tab=e.target.closest('[data-tab]');if(tab){go(tab.dataset.tab);return}
+ const sp=e.target.closest('[data-speak]');if(sp){speak(sp.dataset.speak);return}
+ const cb=e.target.closest('.collectbtn');if(cb){const item={title:cb.dataset.title,front:cb.dataset.front,back:cb.dataset.back};if(!collection.some(c=>c.title===item.title&&c.front===item.front&&c.back===item.back))collection.push(item);cb.textContent='Collected ✓';cb.classList.add('collected');cb.disabled=true;updateScore();toast('Collected ✓ Added to your learning cards');sound(true);return}
+ const opt=e.target.closest('.option');if(opt){const quiz=opt.closest('.quiz');if(quiz.dataset.done)return;quiz.dataset.done='1';answered++;const correct=opt.dataset.correct;const ok=opt.textContent===correct;if(ok)score++;else misses.push({skill:opt.dataset.skill,question:quiz.querySelector('.question').textContent,chosen:opt.textContent,correct:correct,rationale:opt.dataset.rationale});quiz.querySelectorAll('.option').forEach(b=>{if(b.textContent===correct)b.classList.add('correct');else if(b===opt)b.classList.add('wrong');b.disabled=true});const r=quiz.querySelector('.rationale');r.innerHTML='<b>'+(ok?'Correct.':'Not quite.')+'</b> '+esc(opt.dataset.rationale);r.classList.add('show');sound(ok);updateScore();return}
+ const flip=e.target.closest('[data-flip]');if(flip){document.getElementById('flash-'+flip.dataset.flip)?.classList.toggle('flipped');sound(true);return}
+ if(e.target.id==='clearCards'){collection=[];render();toast('Collected cards cleared');return}
+ if(e.target.id==='genSummary'){const unique=[...new Map(misses.map(m=>[m.skill,m])).values()];const fb=document.getElementById('feedback').value.trim();document.getElementById('out').value=['CCMA Medication Mastery Studio Summary','',`Student Score: ${score}/${answered}.`,'','Concepts to Review:',unique.length?unique.map(m=>'- '+m.skill+': '+m.correct).join('\\n'):'- No missed concepts recorded yet.','','Student Feedback:',fb||'No feedback entered yet.','','Designed by Hilary Homaii, Instructional Designer and Curriculum Developer.'].join('\\n');sound(true);return}
+ if(e.target.id==='copySummary'){const out=document.getElementById('out');out.select();document.execCommand('copy');sound(true);return}
+});
+document.addEventListener('input',e=>{if(['vol','pump','res'].includes(e.target.id))calcBP();});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-setbp]');if(b){const [v,p,r]=b.dataset.setbp.split(',').map(Number);document.getElementById('vol').value=v;document.getElementById('pump').value=p;document.getElementById('res').value=r;calcBP();sound(true)}const f=e.target.closest('[data-fluid]');if(f){document.getElementById('fluidFill').style.width=f.dataset.fluid+'%';sound(true)}});
+tabsHTML();render();
+</script>
+</body>
+</html>
