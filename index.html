@@ -20,13 +20,142 @@ header{padding:34px 20px 24px;text-align:center}
 header h1{font-size:clamp(2.1rem,5vw,4.8rem);line-height:.95;letter-spacing:-.07em;margin:0 auto 12px;max-width:1150px}
 header p{max-width:960px;margin:0 auto;color:var(--muted);font-size:1.08rem;line-height:1.6}
 .badge{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 13px;font-weight:950;background:rgba(255,255,255,.85);border:1px solid var(--line);box-shadow:var(--soft);margin-bottom:12px}
-.topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);background:rgba(255,255,255,.78);border-bottom:1px solid rgba(148,163,184,.38);padding:14px 12px 18px;min-height:78px;overflow:visible}
-.tabs{display:flex;gap:10px;overflow-x:auto;overflow-y:visible;max-width:1320px;margin:0 auto;padding:8px 8px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.tabs::-webkit-scrollbar{height:10px}.tabs::-webkit-scrollbar-track{background:rgba(226,232,240,.9);border-radius:999px}.tabs::-webkit-scrollbar-thumb{background:linear-gradient(90deg,#2563eb,#7c3aed,#db2777);border-radius:999px}
-.tab{flex:0 0 auto;border:1px solid rgba(255,255,255,.86);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);padding:13px 17px;min-height:46px;border-radius:999px;white-space:nowrap;font-weight:1000;cursor:pointer;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 -12px 22px rgba(255,255,255,.12),0 10px 24px rgba(15,23,42,.18);transition:.2s}
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(18px);
+  background:rgba(255,255,255,.88);
+  border-bottom:1px solid rgba(148,163,184,.38);
+  padding:10px 10px 12px;
+  min-height:112px;
+  overflow:hidden;
+}
+
+/* Always-visible tab navigation wrapper */
+.tab-scroll-wrap{
+  max-width:1320px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 44px;
+  align-items:center;
+  gap:8px;
+}
+
+/* Permanent left/right scroll buttons */
+.tab-scroll-btn{
+  width:44px;
+  height:44px;
+  border:1px solid rgba(148,163,184,.45);
+  border-radius:999px;
+  background:linear-gradient(135deg,#ffffff,#eef2ff);
+  color:#172033;
+  font-size:1.55rem;
+  font-weight:1000;
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.9);
+  transition:.18s;
+}
+.tab-scroll-btn:hover{
+  transform:translateY(-1px) scale(1.03);
+  background:linear-gradient(135deg,#dbeafe,#f5d0fe);
+}
+.tab-scroll-btn:active{transform:scale(.96)}
+
+/* Scrollable top tab row so students can easily switch tabs */
+.tabs{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:10px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  width:100%;
+  margin:0;
+  padding:10px 10px 18px;
+  -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+  scrollbar-width:auto;
+  scrollbar-color:#7c3aed #e2e8f0;
+  overscroll-behavior-x:contain;
+}
+
+/* Browser scrollbar. Some Mac settings still auto-hide this, so the permanent rail below stays visible. */
+.tabs::-webkit-scrollbar{
+  height:14px;
+  display:block;
+}
+.tabs::-webkit-scrollbar-track{
+  background:rgba(226,232,240,.98);
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.45);
+}
+.tabs::-webkit-scrollbar-thumb{
+  background:linear-gradient(90deg,#2563eb,#7c3aed,#db2777,#ea580c);
+  border-radius:999px;
+  border:2px solid #e2e8f0;
+}
+.tabs::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(90deg,#1d4ed8,#6d28d9,#be185d,#c2410c);
+}
+
+/* This custom rail is ALWAYS visible, even when the operating system hides native scrollbars. */
+.always-scroll-rail{
+  max-width:1320px;
+  height:13px;
+  margin:4px auto 2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#e2e8f0,#f1f5f9);
+  border:1px solid rgba(148,163,184,.55);
+  box-shadow:inset 0 1px 3px rgba(15,23,42,.12);
+  overflow:hidden;
+}
+.always-scroll-thumb{
+  height:100%;
+  width:18%;
+  min-width:72px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#2563eb,#7c3aed,#db2777,#ea580c);
+  box-shadow:0 0 12px rgba(124,58,237,.35);
+  transition:width .15s ease, transform .15s ease;
+}
+.tab-help{
+  max-width:1320px;
+  margin:4px auto 0;
+  text-align:center;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.02em;
+  color:#475569;
+}
+.tab-help b{color:#1d4ed8}
+
+.tab{
+  flex:0 0 auto;
+  border:1px solid rgba(255,255,255,.86);
+  color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+  padding:13px 18px;
+  min-height:48px;
+  border-radius:999px;
+  white-space:nowrap;
+  font-weight:1000;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 -12px 22px rgba(255,255,255,.12),0 10px 24px rgba(15,23,42,.18);
+  transition:.2s;
+}
 .tab:before{content:"";position:absolute;left:10%;top:4px;width:80%;height:38%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,.08));pointer-events:none}
 .tab:hover{transform:translateY(-2px) scale(1.02);filter:saturate(1.25) brightness(1.05)}
 .tab.active{outline:4px solid rgba(37,99,235,.24);transform:translateY(-2px) scale(1.04)}
+@media(max-width:700px){
+  .topbar{padding:8px 6px 10px;min-height:106px}
+  .tab-scroll-wrap{grid-template-columns:38px minmax(0,1fr) 38px;gap:6px}
+  .tab-scroll-btn{width:38px;height:38px;font-size:1.35rem}
+  .tabs{padding:8px 8px 16px;gap:8px}
+  .tab{padding:12px 15px;font-size:.9rem}
+  .tab-help{font-size:.72rem}
+}
 .collect-count{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;margin-left:6px;border-radius:999px;background:#fff;color:#111827;font-weight:1000;text-shadow:none;box-shadow:inset 0 0 0 1px rgba(15,23,42,.12)}
 main{max-width:1320px;margin:0 auto;padding:24px 18px 90px}
 .panel{display:none;animation:fade .25s ease}.panel.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -64,7 +193,15 @@ h2{font-size:clamp(1.6rem,3vw,2.55rem);letter-spacing:-.055em;margin:0 0 10px}h3
 <h1>Medication Mastery Studio</h1>
 <p>A colorful, sound-supported, concept-checking medication class lab designed to help medical assistant students recognize drug classes, suffixes, mechanisms, patient-safety warnings, side effects, adverse reactions, and test-style clues.</p>
 </header>
-<nav class="topbar"><div class="tabs" id="tabs"></div></nav>
+<nav class="topbar">
+  <div class="tab-scroll-wrap">
+    <button class="tab-scroll-btn" data-tab-scroll="left" aria-label="Scroll tabs left">‹</button>
+    <div class="tabs" id="tabs" aria-label="Scrollable lesson tabs"></div>
+    <button class="tab-scroll-btn" data-tab-scroll="right" aria-label="Scroll tabs right">›</button>
+  </div>
+  <div class="always-scroll-rail" aria-hidden="true"><div class="always-scroll-thumb" id="tabProgress"></div></div>
+  <div class="tab-help"><b>Scroll / use arrows</b> to see all lesson tabs</div>
+</nav>
 <main id="app"></main>
 <script>
 const tabs=[
@@ -178,8 +315,23 @@ function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;',
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
 function sound(ok=true){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?760:180;g.gain.setValueAtTime(.07,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.22);o.start();o.stop(c.currentTime+.24)}catch(e){}}
 function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(t).replace(/<[^>]+>/g,''));u.rate=.94;speechSynthesis.speak(u)}catch(e){}}
-function tabsHTML(){document.getElementById('tabs').innerHTML=tabs.map(t=>`<button class="tab ${current===t.id?'active':''}" style="background:linear-gradient(135deg,${t.c},#ffffff33)" data-tab="${t.id}">${t.label}${t.id==='cards'?`<span class="collect-count">${collection.length}</span>`:''}</button>`).join('')}
-function go(id){current=id;tabsHTML();render();window.scrollTo({top:0,behavior:'smooth'})}
+function tabsHTML(){document.getElementById('tabs').innerHTML=tabs.map(t=>`<button class="tab ${current===t.id?'active':''}" style="background:linear-gradient(135deg,${t.c},#ffffff33)" data-tab="${t.id}">${t.label}${t.id==='cards'?`<span class="collect-count">${collection.length}</span>`:''}</button>`).join('');setTimeout(updateTabProgress,30)}
+function updateTabProgress(){
+ const el=document.getElementById('tabs'), thumb=document.getElementById('tabProgress');
+ if(!el||!thumb)return;
+ const max=Math.max(1,el.scrollWidth-el.clientWidth);
+ const visible=Math.max(12,(el.clientWidth/el.scrollWidth)*100);
+ const move=(el.scrollLeft/max)*(100-visible);
+ thumb.style.width=visible+'%';
+ thumb.style.transform=`translateX(${move}%)`;
+}
+function scrollTabs(dir){
+ const el=document.getElementById('tabs'); if(!el)return;
+ const amount=Math.max(220,Math.floor(el.clientWidth*.62));
+ el.scrollBy({left:dir*amount,behavior:'smooth'});
+ setTimeout(updateTabProgress,260);
+}
+function go(id){current=id;tabsHTML();render();window.scrollTo({top:0,behavior:'smooth'});setTimeout(updateTabProgress,80)}
 function collectButton(title,front,back){return `<button class="btn collectbtn" data-title="${esc(title)}" data-front="${esc(front)}" data-back="${esc(back)}">Collect</button>`}
 function q(q){total++;const opts=shuffle([q[1],...q[2]]);return `<div class="quiz" data-skill="${esc(q[4])}"><div class="tag">Concept Check</div><div class="question">${esc(q[0])}</div><div class="options">${opts.map(o=>`<button class="option" data-correct="${esc(q[1])}" data-rationale="${esc(q[3])}" data-skill="${esc(q[4])}">${esc(o)}</button>`).join('')}</div><div class="rationale"></div></div>`}
 function hero(label,title,hook,next){return `<div class="hero"><div><div class="badge">${esc(label)}</div><h2>${esc(title)}</h2><p>${esc(hook)}</p><div class="controls"><button class="btn green" data-speak="${esc(title+'. '+hook)}">Listen</button>${next?`<button class="btn orange" data-tab="${next}">Next</button>`:''}</div></div><div class="reviewbox"><h3>Progress</h3><div class="scorebar"><div class="scorefill" style="width:${total?Math.round(answered/total*100):0}%"></div></div><div class="scorebox">Score: <span class="score">${score}</span> / <span class="answered">${answered}</span></div></div></div>`}
@@ -201,7 +353,14 @@ function updateScore(){document.querySelectorAll('.score').forEach(x=>x.textCont
 function toast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='collected-toast';document.body.appendChild(t)}t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400)}
 function initVisuals(){if(document.getElementById('vol'))calcBP()}
 function calcBP(){const v=+document.getElementById('vol').value,p=+document.getElementById('pump').value,r=+document.getElementById('res').value;document.getElementById('volN').textContent=v;document.getElementById('pumpN').textContent=p;document.getElementById('resN').textContent=r;const load=v*p*r;document.getElementById('bpFill').style.width=Math.min(100,Math.round(load/10))+'%';document.getElementById('bpText').textContent=load<80?'Lower pressure load':load<180?'Moderate pressure load':'High pressure load'}
+window.addEventListener('resize',updateTabProgress);
+setTimeout(()=>{
+ const tabScroller=document.getElementById('tabs');
+ if(tabScroller)tabScroller.addEventListener('scroll',updateTabProgress,{passive:true});
+ updateTabProgress();
+},50);
 document.addEventListener('click',e=>{
+ const arrow=e.target.closest('[data-tab-scroll]');if(arrow){scrollTabs(arrow.dataset.tabScroll==='right'?1:-1);return}
  const tab=e.target.closest('[data-tab]');if(tab){go(tab.dataset.tab);return}
  const sp=e.target.closest('[data-speak]');if(sp){speak(sp.dataset.speak);return}
  const cb=e.target.closest('.collectbtn');if(cb){const item={title:cb.dataset.title,front:cb.dataset.front,back:cb.dataset.back};if(!collection.some(c=>c.title===item.title&&c.front===item.front&&c.back===item.back))collection.push(item);cb.textContent='Collected ✓';cb.classList.add('collected');cb.disabled=true;updateScore();toast('Collected ✓ Added to your learning cards');sound(true);return}
